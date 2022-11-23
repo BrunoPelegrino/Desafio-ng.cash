@@ -1,12 +1,12 @@
 import { INTEGER, STRING, Model } from 'sequelize';
 import db from '.'
-import Account from './Account';
+import Account from './Account.model';
 
 class User extends Model {
-  private id!: number;
-  private username!: string;
-  private password!: string;
-  private accountId!: number;
+  private _id!: number;
+  private _username!: string;
+  private _password!: string;
+  private _accountId!: number;
 
 }
 
@@ -29,13 +29,19 @@ User.init({
   accountId : { 
     type: INTEGER,
     allowNull: false,
-  }
+    references: {
+      model: 'Accounts',
+      key: 'id',
+    },
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
+  },
 },{
   sequelize: db,
-  modelName: 'users',
+  modelName: 'User',
   timestamps: false,
 });
 
-User.belongsTo(Account, {foreignKey: 'accountId', as: 'user'});
+// User.belongsTo(Account, {foreignKey: 'accountId', as: 'user'});
 
 export default User

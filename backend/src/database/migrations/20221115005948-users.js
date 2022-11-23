@@ -24,6 +24,8 @@ module.exports = {
           model: 'accounts',
           key: 'id'
         },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       }
     });
   },

@@ -1,17 +1,11 @@
 import express = require('express');
 import 'express-async-errors';
+import { userRouter } from './database/routes';
 
-class App {
-  public app: express.Express;
+const app = express();
 
-  constructor() {
-    this.app = express();
+app.use(userRouter)
 
-  }
+app.use(express.json());
 
-  public start(PORT: string | number):void {
-    this.app.listen(PORT, () => console.log(`Running on port ${PORT}`));
-  }
-}
-
-export { App };
+export default app;
